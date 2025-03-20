@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Giftful
+
+Giftful is a web application that helps you track important dates and get personalized gift suggestions for your friends and family members. Built with Next.js, Supabase, and Claude AI.
+
+## Features
+
+- Track important dates (birthdays, anniversaries, etc.)
+- Get AI-powered gift suggestions based on relationships and interests
+- Email notifications for upcoming events
+- Clean and modern UI with shadcn/ui components
+- Secure authentication with Supabase
+
+## Tech Stack
+
+- Frontend: React.js, Next.js
+- Backend: Next.js API routes
+- Database: Supabase
+- Authentication: Supabase Auth
+- Styling: Tailwind CSS with shadcn/ui components
+- Language: TypeScript
+- Package Management: npm/npx
+- AI Integration: Anthropic Claude API
+- Scheduled Tasks: Pipedream for email notifications
+- Hosting: Vercel
+
+## Prerequisites
+
+- Node.js 18+ and npm
+- Supabase account and project
+- Anthropic Claude API key
+- Pipedream account (for email notifications)
+
+## Environment Variables
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+ANTHROPIC_API_KEY=your_claude_api_key
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+   ```bash
+   git clone https://github.com/yourusername/giftful.git
+   cd giftful
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. Set up the database:
 
-## Learn More
+   - Create a new Supabase project
+   - Run the SQL commands in `supabase/schema.sql` to create the necessary tables
+   - Set up Row Level Security (RLS) policies as defined in the schema
 
-To learn more about Next.js, take a look at the following resources:
+4. Start the development server:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Deploy on Vercel
+## Database Schema
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The application uses the following tables:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `users`: Stores user information
+- `contacts`: Stores contact information
+- `important_dates`: Stores important dates for contacts
+- `gift_suggestions`: Stores AI-generated gift suggestions
+
+## Email Notifications
+
+Email notifications are handled by Pipedream:
+
+1. Create a new Pipedream workflow
+2. Set up a daily trigger (e.g., at 8:00 AM)
+3. Add a Node.js step to fetch upcoming events
+4. Add an email step to send notifications
+5. Deploy the workflow
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

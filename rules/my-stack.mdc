@@ -1,0 +1,19 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+
+# Technical stack
+
+- Frontend: React.js, Next.js
+- Backend: Next.js API routes
+- Database: Supabase
+- Separate databases for dev, test and prod
+- Authentication: Supabase Auth
+- Styling: Tailwind CSS with shadcn/ui components
+- Language: TypeScript
+- Package Management: npm/npx
+- AI Integration: Claude API
+- Scheduled Tasks: Pipedream for email notifications
+- Hosting: Vercel
