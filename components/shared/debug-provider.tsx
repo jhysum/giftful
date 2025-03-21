@@ -21,42 +21,62 @@ export function DebugProvider({ children }: { children: ReactNode }) {
       {children}
       {debugMode && (
         <style jsx global>{`
-          * {
-            outline: 1px solid rgba(255, 0, 0, 0.2) !important;
+          /* Use attribute selectors instead of element selectors to avoid conflicts */
+          [data-debug] * {
+            outline: 1px solid rgba(255, 0, 0, 0.2);
           }
 
-          div,
-          section,
-          article,
-          aside,
-          nav,
-          header,
-          footer,
-          main {
+          /* Container elements */
+          [data-debug] div:not([class*="shadcn"]),
+          [data-debug] section:not([class*="shadcn"]),
+          [data-debug] article:not([class*="shadcn"]),
+          [data-debug] aside:not([class*="shadcn"]),
+          [data-debug] nav:not([class*="shadcn"]),
+          [data-debug] header:not([class*="shadcn"]),
+          [data-debug] footer:not([class*="shadcn"]),
+          [data-debug] main:not([class*="shadcn"]) {
+            background-color: rgba(255, 0, 0, 0.05);
+          }
+
+          /* Interactive elements */
+          [data-debug] button:not([class*="shadcn"]),
+          [data-debug] a:not([class*="shadcn"]),
+          [data-debug] input:not([class*="shadcn"]),
+          [data-debug] textarea:not([class*="shadcn"]),
+          [data-debug] select:not([class*="shadcn"]) {
+            background-color: rgba(0, 0, 255, 0.05);
+          }
+
+          /* Text elements */
+          [data-debug] h1:not([class*="shadcn"]),
+          [data-debug] h2:not([class*="shadcn"]),
+          [data-debug] h3:not([class*="shadcn"]),
+          [data-debug] h4:not([class*="shadcn"]),
+          [data-debug] h5:not([class*="shadcn"]),
+          [data-debug] h6:not([class*="shadcn"]),
+          [data-debug] p:not([class*="shadcn"]),
+          [data-debug] span:not([class*="shadcn"]) {
+            background-color: rgba(0, 255, 0, 0.05);
+          }
+
+          /* Add debug classes to complement the attribute-based styling */
+          .debug-container {
+            outline: 1px solid rgba(255, 0, 0, 0.5) !important;
             background-color: rgba(255, 0, 0, 0.05) !important;
           }
 
-          button,
-          a,
-          input,
-          textarea,
-          select {
+          .debug-interactive {
+            outline: 1px solid rgba(0, 0, 255, 0.5) !important;
             background-color: rgba(0, 0, 255, 0.05) !important;
           }
 
-          h1,
-          h2,
-          h3,
-          h4,
-          h5,
-          h6,
-          p,
-          span {
+          .debug-text {
+            outline: 1px solid rgba(0, 255, 0, 0.5) !important;
             background-color: rgba(0, 255, 0, 0.05) !important;
           }
         `}</style>
       )}
-      <div className="fixed bottom-4 right-4 z-50">
+      <div className="fixed bottom-4 right-4 z-50" data-debug-control>
         <button
           onClick={toggleDebugMode}
           className="bg-slate-800 text-white px-3 py-1 rounded-md text-xs shadow-md hover:bg-slate-700"
@@ -64,6 +84,25 @@ export function DebugProvider({ children }: { children: ReactNode }) {
           {debugMode ? "Debug: ON" : "Debug: OFF"}
         </button>
       </div>
+      {/* Add a data attribute to the document body when debug mode is on */}
+      {debugMode && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            document.body.setAttribute('data-debug', 'true');
+          `,
+          }}
+        />
+      )}
+      {!debugMode && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            document.body.removeAttribute('data-debug');
+          `,
+          }}
+        />
+      )}
     </DebugContext.Provider>
   );
 }

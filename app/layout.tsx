@@ -30,11 +30,13 @@ export default async function RootLayout({
         <DebugProvider>
           <header className="border-b">
             <div className="container mx-auto px-4 py-4">
-              <nav className="flex justify-between items-center">
-                <Link href="/" className="text-xl font-bold">
+              <nav className="flex items-center w-full">
+                {/* Logo - stays on the left */}
+                <Link href="/" className="text-xl font-bold mr-auto">
                   Giftful
                 </Link>
 
+                {/* Navigation links - in the middle */}
                 <div className="flex items-center gap-4">
                   {user ? (
                     <>
@@ -44,21 +46,28 @@ export default async function RootLayout({
                       <Link href="/contacts">
                         <Button variant="ghost">Contacts</Button>
                       </Link>
-                      <form action="/auth/signout" method="post">
-                        <Button variant="ghost" type="submit">
-                          Sign Out
-                        </Button>
-                      </form>
                     </>
                   ) : (
                     <>
                       <Link href="/auth/login">
                         <Button variant="ghost">Sign In</Button>
                       </Link>
-                      <Link href="/auth/register">
-                        <Button>Sign Up</Button>
-                      </Link>
                     </>
+                  )}
+                </div>
+
+                {/* Sign Out button - pushed to the right */}
+                <div className="ml-auto">
+                  {user ? (
+                    <form action="/auth/signout" method="post">
+                      <Button variant="ghost" type="submit">
+                        Sign Out
+                      </Button>
+                    </form>
+                  ) : (
+                    <Link href="/auth/register">
+                      <Button>Sign Up</Button>
+                    </Link>
                   )}
                 </div>
               </nav>
