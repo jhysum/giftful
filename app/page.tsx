@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import DebugDemo from "@/components/shared/debug-demo";
 
 export default function HomePage() {
   return (
@@ -88,6 +89,13 @@ export default function HomePage() {
           <Link href="/auth/register">
             <Button size="lg">Create Your Account</Button>
           </Link>
+        </div>
+      </section>
+
+      {/* Debug Demo - For development only */}
+      <section className="py-10 border-t">
+        <div className="container mx-auto px-4">
+          <DebugDemo />
         </div>
       </section>
     </div>

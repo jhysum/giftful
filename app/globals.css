@@ -74,3 +74,19 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Debug mode styles */
+.debug-container {
+  outline: 1px solid rgba(255, 0, 0, 0.5) !important;
+  background-color: rgba(255, 0, 0, 0.05) !important;
+}
+
+.debug-interactive {
+  outline: 1px solid rgba(0, 0, 255, 0.5) !important;
+  background-color: rgba(0, 0, 255, 0.05) !important;
+}
+
+.debug-text {
+  outline: 1px solid rgba(0, 255, 0, 0.5) !important;
+  background-color: rgba(0, 255, 0, 0.05) !important;
+}
